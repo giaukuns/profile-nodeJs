@@ -11,7 +11,7 @@ const connectDB = require("./utils/connectDb.js");
 /**
  * Khai báo model
  */
-const User = require("./routers/User/user");
+const User = require("./routers/User/user.router");
 const Login = require("./routers/User/login");
 const app = express();
 const port = process.env.PORT;

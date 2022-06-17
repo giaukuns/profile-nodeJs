@@ -9,7 +9,7 @@ const { format } = require("date-fns");
 /**
  * Khai báo model
  */
-const User = require("../../models/User/user");
+const User = require("../../models/User/user.model");
 const passSchema = new passValidator();
 const passMinLen = 6;
 const passMaxLen = 24;
@@ -132,9 +132,53 @@ const createUser = async (req, res) => {
   }
 };
 /**
- * Tìm user
+ * Find all user
  */
+ const getUser = async (req, res) => {
+  connectDB();
+  try {
+    const findUser = await User.find().select("-password");
+    const data = {
+      findUser,
+    };
+    return res.status(200).json({
+      success: true,
+      msg: "Tìm Kiếm thành công",
+      data,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: null,
+      errors: [{ message: error.message }],
+    });
+  }
+};
 
+/**
+ * Find User by Id
+ */
+ const getUserById = async (req, res) => {
+  connectDB();
+  try {
+    let { id } = req.params;
+    const findUser = await User.findById({ _id: id }).select("-password");
+    const data = {
+      findUser,
+    };
+    return res.status(200).json({
+      success: true,
+      msg: "Tìm Kiếm thành công",
+      data,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: null,
+      errors: [{ message: error.message }],
+    });
+  }
+};
 module.exports = {
   createUser,
+  getUser,
+  getUserById
 };

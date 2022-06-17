@@ -7,7 +7,7 @@ const connectDB = require("../../utils/connectDb");
 /**
  * Khai báo model
  */
-const User = require("../../models/User/user");
+const User = require("../../models/User/user.model");
 const passSchema = new passValidator();
 const passMinLen = 6;
 const passMaxLen = 24;
