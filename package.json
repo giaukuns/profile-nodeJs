@@ -1,7 +1,7 @@
 {
-  "name": "fakebook",
+  "name": "profilevng",
   "version": "1.0.0",
-  "description": "",
+  "description": "* Profile - Vo Ngoc Giau",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,5 +26,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giaukuns/profile-nodeJs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/giaukuns/profile-nodeJs/issues"
+  },
+  "homepage": "https://github.com/giaukuns/profile-nodeJs#readme"
 }

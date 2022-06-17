@@ -8,8 +8,9 @@ const User = require("../../models/User/user");
  * Tìm user
  */
 const getUser = async (req, res) => {
+  connectDB();
   try {
-    const findUser = await User.find();
+    const findUser = await User.find().select("-password");
     const data = {
       findUser,
     };
