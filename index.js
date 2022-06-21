@@ -12,6 +12,7 @@ const connectDB = require("./utils/connectDb.js");
  * Khai báo model
  */
 const User = require("./routers/User/user.router");
+const Post = require("./routers/Posts/Posts.router")
 const Login = require("./routers/User/login");
 const app = express();
 const port = process.env.PORT;
@@ -35,6 +36,7 @@ require("./authenticate/passport")(passport);
 app.use("/api/v1", Login);
 // app.use(passport.authenticate("jwt", { session: false })); //Kiểm ta đăng nhập
 app.use("/api/v1/user", User);
+app.use("/api/v1/post", Post);
 app.listen(port, (err) => {
   if (err) return console.error(err);
   return console.log("Connect server successfully");
