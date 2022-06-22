@@ -7,6 +7,7 @@ const { format } = require("date-fns");
  * import model
  */
 const Posts = require("../../models/Post/posts.model");
+const Users = require("../../models/User/user.model");
 
 const createPosts = async (req, res) => {
   try {
@@ -61,10 +62,18 @@ const createPosts = async (req, res) => {
     const newPosts = new Posts({
       ...req.body,
       image: url_images,
+      userId: req.user.id
     });
 
     const result = await newPosts.save();
     await Posts.find();
+    console.log("result",result)
+    console.log("data", req.user);
+       await Users.findByIdAndUpdate(
+        { _id: req.user.id },
+        { $push: { listpostid: result.id } }
+      );
+    
 
     return res.status(200).json({
       success: true,
@@ -98,7 +107,35 @@ const getAllPost = async (req, res) => {
     });
   }
 };
+
+const getPostByUser = async (req, res) => {
+  connectDB();
+  try {
+    let { id } = req.params;
+    const findPostbyUser = await Users.findById({ _id: id })
+      .select("lastName firstName fullName listPost")
+      .populate({
+        path: "listpostid",
+        select: "title description content image.url",
+      });
+    const data = {
+      findPostbyUser,
+    };
+    return res.status(200).json({
+      success: true,
+      msg: "Tìm Kiếm thành công",
+      data,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: null,
+      errors: [{ message: error.message }],
+    });
+  }
+};
+
 module.exports = {
   createPosts,
   getAllPost,
+  getPostByUser,
 };

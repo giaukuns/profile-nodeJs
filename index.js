@@ -34,7 +34,7 @@ require("./authenticate/passport")(passport);
  */
 
 app.use("/api/v1", Login);
-// app.use(passport.authenticate("jwt", { session: false })); //Kiểm ta đăng nhập
+app.use(passport.authenticate("jwt", { session: false })); //Kiểm ta đăng nhập
 app.use("/api/v1/user", User);
 app.use("/api/v1/post", Post);
 app.listen(port, (err) => {

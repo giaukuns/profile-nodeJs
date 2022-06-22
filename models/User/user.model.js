@@ -38,7 +38,7 @@ const User = new Schema({
   ],
   email: String,
   password: String,
-  listPost: [{ type: Schema.Types.ObjectId, ref: "Posts", default: [] }],
+  listpostid: [{ type: Schema.Types.ObjectId, ref: "Post", default: [] }],
 });
 User.virtual("fullName").get(function () {
   return this.firstName + " " + this.lastName;
