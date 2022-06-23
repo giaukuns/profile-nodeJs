@@ -1,7 +1,8 @@
 const {
 createPosts,
 getAllPost,
-getPostByUser
+getPostByUser,
+deletePost
   } = require("../../controllers/Post/posts.controller");
     
   const express = require("express");
@@ -10,4 +11,5 @@ getPostByUser
   router.post("/createPost", createPosts);
   router.get("/getAllPost", getAllPost);
   router.get("/getPostByUser/:id", getPostByUser);
+  router.put("/delete/:id",deletePost)
   module.exports = router;
